@@ -30,10 +30,10 @@ export const createUser = async (data: User) => {
   };
 };
 
-export const getUserByEmail = async (email: string) => {
+export const getUserByid = async (id: number) => {
   const user = await prisma.user.findUnique({
     where: {
-      email,
+      id,
     },
   });
 

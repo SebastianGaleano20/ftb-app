@@ -1,7 +1,7 @@
 import {
   createUser,
   getAllUsers,
-  getUserByEmail,
+  getUserByid,
   updateUser,
   deleteUser,
 } from "@/services/userService";
@@ -27,10 +27,12 @@ export const getAllUsersController = async () => {
   }
 };
 
-export const getUserByEmailController = async (req: Request) => {
-  const { email } = await req.json();
+export const getUserByIdController = async (req: Request) => {
+  const { id } = await req.json();
+  const idNumber = parseInt(id);
+
   try {
-    const user = await getUserByEmail(email);
+    const user = await getUserByid(idNumber);
     return Response.json(user, { status: 200 });
   } catch (error) {
     return new Response(`${error} - Error getting user`, { status: 500 });
