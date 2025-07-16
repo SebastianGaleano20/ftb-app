@@ -50,7 +50,7 @@ export const getAllUsers = async () => {
   return users;
 };
 
-export const deleteUser = async (id: string) => {
+export const deleteUser = async (id: number) => {
   const user = await prisma.user.delete({
     where: {
       id,
@@ -60,7 +60,7 @@ export const deleteUser = async (id: string) => {
   return user;
 };
 
-export const updateUser = async (id: string, data: User) => {
+export const updateUser = async (id: number, data: User) => {
   const { fullName, email, password } = data;
   const hashedPassword = await bcrypt.hash(password, 10);
   const user = await prisma.user.update({
@@ -74,14 +74,5 @@ export const updateUser = async (id: string, data: User) => {
     },
   });
 
-  return user;
-};
-
-export const getUserById = async (id: string) => {
-  const user = await prisma.user.findUnique({
-    where: {
-      id,
-    },
-  });
   return user;
 };
