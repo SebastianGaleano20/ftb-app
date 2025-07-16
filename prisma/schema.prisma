@@ -11,13 +11,12 @@ datasource db {
 model User {
   id       Int     @id @default(autoincrement())
   email    String  @unique
-  fullname String?
-  nickname String?
+  fullName String? @map("full_name")
+  nickname String? @map("nick_name")
   password String
   image    String?
-
-  role  Role   @default(USER)
-  posts Post[]
+  role     Role    @default(USER)
+  posts    Post[]
 
   @@map("users")
 }
@@ -30,11 +29,11 @@ model Post {
   images      String[]
   video       String[]
   published   Boolean  @default(false)
-  author      User     @relation(fields: [authorId], references: [id])
-  authorId    Int
+  authorId    Int      @map("author_id")
   publishedAt DateTime @default(now())
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  author      User     @relation(fields: [authorId], references: [id])
 
   @@map("posts")
 }
